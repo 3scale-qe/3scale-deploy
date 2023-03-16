@@ -1,5 +1,9 @@
+import logging
+
 import boto3
-from . import logger
+import botocore.exceptions
+
+from . import logger, log_exception
 
 
 CORS_RULES = {
@@ -8,14 +12,23 @@ CORS_RULES = {
 
 
 def create_bucket(bucket_name):
-    logger.info(f"Creating bucket {bucket_name}")
+    logger.info("Creating bucket %s" % bucket_name)
 
-    client = boto3.client("s3")
-    bucket = client.create_bucket(
-        ACL="private",
-        Bucket=bucket_name,
-    )
-    client.put_bucket_cors(Bucket=bucket_name, CORSConfiguration=CORS_RULES)
+    try:
+        client = boto3.client("s3")
+        bucket = client.create_bucket(
+            ACL="private",
+            Bucket=bucket_name,
+        )
+        logger.debug("Bucket created applying cors policy")
+        client.put_bucket_cors(Bucket=bucket_name, CORSConfiguration=CORS_RULES)
+        logger.debug("Bucket creation finished")
+    except (
+        botocore.exceptions.ClientError,
+        botocore.exceptions.NoCredentialsError,
+    ) as ex:
+        log_exception(f"Cannot create bucket {ex}", logging.ERROR, ex)
+        exit(-1)
     return bucket["Location"]
 
 

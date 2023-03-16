@@ -2,7 +2,7 @@ from typing import Dict, Optional
 from os import environ
 
 
-def get_AWS_details() -> Dict[str, str]:
+def get_aws_details() -> Dict[str, str]:
     return {
         "AWS_ACCESS_KEY_ID": environ["AWS_ACCESS_KEY_ID"],
         "AWS_REGION": environ["AWS_REGION"],

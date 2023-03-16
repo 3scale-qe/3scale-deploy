@@ -27,6 +27,6 @@ RUN pip3 --no-cache-dir install /root/3scale_deploy*.whl \
 
 USER user
 
-ENTRYPOINT [ "trdpl" ]
+ENTRYPOINT [ "deploy" ]
 CMD ["install"]
 

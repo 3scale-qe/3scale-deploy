@@ -8,7 +8,7 @@ readme = "README.md"
 packages = [{include = "threescale_deploy"}]
 
 [tool.poetry.scripts]
-trdpl = 'threescale_deploy.installer:cli'
+deploy = 'threescale_deploy.installer:cli'
 
 [tool.poetry.dependencies]
 python = "^3.9"
