@@ -1,6 +1,7 @@
 import openshift
 from typing import Dict
 from .environment import get_AWS_details, get_route_prefix, get_cluster_wildcard
+from . import logger
 
 
 def _build_apimanager(name: str, domain: str, secret_name: str) -> Dict:
@@ -24,6 +25,7 @@ def _build_apimanager(name: str, domain: str, secret_name: str) -> Dict:
 
 def _resolve_wildcard_domain() -> str:
     wildcard = get_cluster_wildcard()
+    logger
     if not wildcard:
         wildcard = (
             openshift.selector("ingress.v1.config.openshift.io/cluster")

@@ -1,4 +1,5 @@
 import boto3
+from . import logger
 
 
 CORS_RULES = {
@@ -7,6 +8,8 @@ CORS_RULES = {
 
 
 def create_bucket(bucket_name):
+    logger.info(f"Creating bucket {bucket_name}")
+
     client = boto3.client("s3")
     bucket = client.create_bucket(
         ACL="private",
@@ -19,8 +22,10 @@ def create_bucket(bucket_name):
 def remove_bucket(bucket_name):
     client = boto3.client("s3")
     should_delete = True
+    logger.info(f"Starting clean of bucket: {bucket_name}")
     while should_delete:
         objects = client.list_objects(Bucket=bucket_name)
+        logger.debug(f"Deleting objects in bucket")
         if objects.get("Contents", None) is None:
             break
         should_delete = objects["IsTruncated"]
@@ -29,3 +34,4 @@ def remove_bucket(bucket_name):
             Delete={"Objects": [{"Key": key["Key"]} for key in objects["Contents"]]},
         )
     client.delete_bucket(Bucket=bucket_name)
+    logger.info(f"Bucket {bucket_name} deleted")
