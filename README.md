@@ -15,7 +15,7 @@ In order to successfully deploy 3scale you need to meet following criteria:
     added as well. Otherwise `DEPL_CLUSTER_WILD` environment variable must be set.
 * The pod has exported environment variables as defined in `env-file.txt`.
 
-If all of the requirements are met then the pod can successfully deploy 3scale.
+If all the requirements are met then the pod can successfully deploy 3scale.
 
 ## Deployment
 
@@ -62,12 +62,12 @@ as a second argument of command `deploy`.
 
 In order to run, the container needs following variables set:
 
-| Variable                | Availability | Dscription                                                                                                                      |
-|-------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------|
-| `AWS_ACCESS_KEY_ID`     | **Required** | AMI Key id used for authentication to AWS (create bucket, connect 3scale to bucket and remove bucket)                           |
- | `AWS_SECRET_ACCESS_KEY` | **Required** | AMI secret key                                                                                                                  |
- | `AWS_REGION`            | **Required** | AWS region where the bucket will be created                                                                                     |
- | `DEPL_PROJECT_NAME`     | **Required** | Namespace where the 3scale will be deployed                                                                                     |
- | `DEPL_BUCKET_NAME`      | **Required** | Name of bucket created for 3scale                                                                                               |
-| `DEPL_ROUTE_PREF`       | *Optional*   | If set prefix for the route creation by 3scale e.g. routes will be created in `*.${DEPL_ROUTE_PREF}.${CLUSTER_WILDCARD_DOMAIN}` |
- | `DEPL_CLUSTER_WILD`     | *Optional*   | If set, the resolution of `CLUSTER_WILDCARD_DOMAIN` is skipped and this value is used. See above.                               |
+| Variable                | Availability | Description                                                                                                                                   |
+|-------------------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------|
+| `AWS_ACCESS_KEY_ID`     | **Required** | IAM Key id used for authentication to AWS (create bucket, connect 3scale to bucket and remove bucket)                                         |
+ | `AWS_SECRET_ACCESS_KEY` | **Required** | IAM secret key                                                                                                                                |
+ | `AWS_REGION`            | **Required** | AWS region where the bucket will be created                                                                                                   |
+ | `DEPL_PROJECT_NAME`     | **Required** | Namespace where the 3scale will be deployed                                                                                                   |
+ | `DEPL_BUCKET_NAME`      | **Required** | Name of bucket created for 3scale                                                                                                             |
+| `DEPL_ROUTE_PREF`       | *Optional*   | If set prefix for the route creation by 3scale will be added e.g. routes will be created in `*.${DEPL_ROUTE_PREF}.${CLUSTER_WILDCARD_DOMAIN}` |
+ | `DEPL_CLUSTER_WILD`     | *Optional*   | If set, the resolution of `CLUSTER_WILDCARD_DOMAIN` is skipped and this value is used. See above.                                             |
