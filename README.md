@@ -57,3 +57,17 @@ as a second argument of command `deploy`.
         - -vv
         - remove
 ```
+
+## Variables
+
+In order to run, the container needs following variables set:
+
+| Variable                | Availability | Dscription                                                                                                                      |
+|-------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------|
+| `AWS_ACCESS_KEY_ID`     | **Required** | AMI Key id used for authentication to AWS (create bucket, connect 3scale to bucket and remove bucket)                           |
+ | `AWS_SECRET_ACCESS_KEY` | **Required** | AMI secret key                                                                                                                  |
+ | `AWS_REGION`            | **Required** | AWS region where the bucket will be created                                                                                     |
+ | `DEPL_PROJECT_NAME`     | **Required** | Namespace where the 3scale will be deployed                                                                                     |
+ | `DEPL_BUCKET_NAME`      | **Required** | Name of bucket created for 3scale                                                                                               |
+| `DEPL_ROUTE_PREF`       | *Optional*   | If set prefix for the route creation by 3scale e.g. routes will be created in `*.${DEPL_ROUTE_PREF}.${CLUSTER_WILDCARD_DOMAIN}` |
+ | `DEPL_CLUSTER_WILD`     | *Optional*   | If set, the resolution of `CLUSTER_WILDCARD_DOMAIN` is skipped and this value is used. See above.                               |
